@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>letter</title>
+  </head>
+  <body>
+    <section class="cssletter">
+      <div class="envelope">
+        <button class="heart" id="openEnvelope" aria-label="Open Envelope">
+          <span class="heart-text">Open</span>
+        </button>
+        <div class="envelope-flap">
+          <div style="z-index: 10000">
+            <p>From: Keith</p>
+            <p>To: Sir Randy</p>
+          </div>
+        </div>
+        <div class="envelope-folds">
+          <div class="envelope-left"></div>
+          <div class="envelope-right"></div>
+          <div class="envelope-bottom"></div>
+        </div>
+      </div>
+      <div class="letters">
+        <blockquote
+          class="letter center"
+          id="21"
+          tabindex="0"
+          style="left: 390px"
+        >
+          <button class="closeLetter" title="Close Julian's letter">
+            Close 2nd letter
+          </button>
+          <p>
+            Salamat po sir sa permi na pag share san imo knowledge saamon, kag
+            salamat sa paga hatag saamon san mga oppurtunidad na kami maka aram
+            san iba iba pa na mga bagay. Salamat po sa serbisyo mo sir na kami
+            tukduan. Unta madamo kapa matukduan sa mga bagay bagay sir. Happy
+            Teachers Day po, Sir Randy!
+          </p>
+        </blockquote>
+
+        <blockquote
+          class="letter center"
+          id="22"
+          tabindex="0"
+          style="left: 390px"
+        >
+          <button class="closeLetter" title="Close Elena's letter">
+            Close 1st letter
+          </button>
+          <p>Happy Teacher's Day po sir!</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <div id="header-plugin"></div>
+
+    <div class="bg_heart"></div>
+
+    <!-- Animated Hearts -->
+    <div class="floating-hearts">
+      <div class="animated-heart heart-1"></div>
+      <div class="animated-heart heart-2"></div>
+      <div class="animated-heart heart-3"></div>
+      <div class="animated-heart heart-4"></div>
+      <div class="animated-heart heart-5"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

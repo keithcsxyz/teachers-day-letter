@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>?</title>
+    <script src="sweetalert2@11.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #ffe8cd;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        position: relative;
+      }
+
+      .question {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 50px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .buttons-container {
+        position: relative;
+        width: 400px;
+        height: 200px;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: absolute;
+      }
+
+      .btn-yes {
+        background-color: #ffdcdc;
+        color: #333;
+        left: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btn-yes:hover {
+        background-color: #fff2eb;
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      .btn-no {
+        background-color: #ffd6ba;
+        color: #333;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 0.15s ease;
+        z-index: 100;
+      }
+
+      .response {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff2eb;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        display: none;
+        z-index: 1000;
+      }
+
+      .hearts {
+        font-size: 3rem;
+        color: #ff69b4;
+        margin-top: 20px;
+      }
+
+      /* Custom SweetAlert2 styling */
+      .swal-title {
+        font-size: 2.5rem !important;
+        font-weight: bold !important;
+        color: #333 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="https://media1.tenor.com/m/DN2bzxNeHqAAAAAd/puss-in-boots-cute.gif"
+        alt=""
+        srcset=""
+        style="height: 300px"
+      />
+      <h1 class="question">pasado po ba ako sir?</h1>
+      <div class="buttons-container">
+        <button class="btn btn-yes" onclick="showLove()">OPO</button>
+        <button class="btn btn-no" id="noBtn">DILI</button>
+      </div>
+    </div>
+
+    <div class="response" id="response">
+      <div>I KNEW IT! 💕</div>
+      <div class="hearts">💖 💕 💗 💖 💕</div>
+    </div>
+
+    <script>
+      const noBtn = document.getElementById("noBtn");
+      const buttonsContainer = document.querySelector(".buttons-container");
+
+      let mouseX = 0;
+      let mouseY = 0;
+
+      // Track mouse movement
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        moveNoButton();
+      });
+
+      function moveNoButton() {
+        const rect = noBtn.getBoundingClientRect();
+        const btnCenterX = rect.left + rect.width / 2;
+        const btnCenterY = rect.top + rect.height / 2;
+
+        const distance = Math.sqrt(
+          Math.pow(mouseX - btnCenterX, 2) + Math.pow(mouseY - btnCenterY, 2)
+        );
+
+        // If mouse is within 150px of the button, move it away
+        if (distance < 150) {
+          // Get screen dimensions
+          const screenWidth = window.innerWidth;
+          const screenHeight = window.innerHeight;
+
+          // Button dimensions
+          const btnWidth = rect.width;
+          const btnHeight = rect.height;
+
+          let newX, newY;
+          let attempts = 0;
+
+          // Find a position far from the mouse
+          do {
+            newX = Math.random() * (screenWidth - btnWidth);
+            newY = Math.random() * (screenHeight - btnHeight);
+
+            // Calculate distance from mouse to potential new position
+            const distanceFromMouse = Math.sqrt(
+              Math.pow(mouseX - (newX + btnWidth / 2), 2) +
+                Math.pow(mouseY - (newY + btnHeight / 2), 2)
+            );
+
+            attempts++;
+
+            // Accept position if it's far enough from mouse or after many attempts
+            if (distanceFromMouse > 200 || attempts > 20) {
+              break;
+            }
+          } while (attempts < 50);
+
+          // Position the button absolutely on the screen
+          noBtn.style.position = "fixed";
+          noBtn.style.left = newX + "px";
+          noBtn.style.top = newY + "px";
+          noBtn.style.right = "auto";
+          noBtn.style.bottom = "auto";
+          noBtn.style.transform = "none";
+        }
+      }
+
+      // Prevent clicking the NO button
+      noBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        moveNoButton();
+      });
+
+      function showLove() {
+        Swal.fire({
+          title: "thank you sir! recorded po ini!",
+          imageUrl: "https://media1.tenor.com/m/unAddNr00YMAAAAd/tagumpay.gif",
+          imageWidth: 300,
+          imageHeight: 200,
+          imageAlt: "Flowers",
+          showConfirmButton: false,
+          timer: 6000,
+          timerProgressBar: true,
+          background: "#FFF2EB",
+          color: "#333",
+          customClass: {
+            title: "swal-title",
+          },
+        }).then(() => {
+          // Redirect to love_letter index after 6 seconds
+          window.location.href = "letter/index.html";
+        });
+
+        // Add some celebration effects to background
+        setTimeout(() => {
+          document.body.style.backgroundColor = "#FFF2EB";
+        }, 500);
+      }
+    </script>
+  </body>
+</html>
